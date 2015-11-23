@@ -1,0 +1,34 @@
+{
+    "name": "seekquarry/yioop",
+    "description": "Search Engine Portal with Front-end, Indexer, Crawler, Wiki, and NLP libraries",
+    "homepage": "https://www.seekquarry.com/",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Chris Pollett",
+            "email": "chris@pollett.org"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "ext-dom": "*",
+        "ext-gd": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pcre": "*",
+        "ext-PDO":"*",
+        "ext-pdo_sqlite": "*",
+        "ext-SPL":"*",
+        "ext-zip": "*",
+        "lib-curl": "*",
+        "lib-libxml": "*",
+        "lib-pcre": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "seekquarry\\yioop\\": ["work_directory/app/", "src/"],
+            "seekquarry\\yioop\\tests\\": ["tests/"]
+        }
+    }
+}

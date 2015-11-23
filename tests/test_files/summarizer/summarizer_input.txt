@@ -1,0 +1,17 @@
+the|<a href="the.html">I went to the store but the hours were different</a>the<a></a>
+the|<h1>I went to the store but the hours were different</h1>the<h1></h1>
+the|<h2>I went to the store but the hours were different</h2>the<h2></h2>
+the|<h3>I went to the store but the hours were different</h3>the<h3></h3>
+the|<h4>I went to the store but the hours were different</h4>the<h4></h4>
+the|<h5>I went to the store but the hours were different</h5>the<h5></h5>
+the|<h6>I went to the store but the hours were different</h6>the<h6></h6>
+the|<strong>I went to the store but the hours were different</strong>the<strong></strong>
+the|<b>I went to the store but the hours were different</b>the<b></b>
+the|<em>I went to the store but the hours were different</em>the<em></em>
+the|<i>I went to the store but the hours were different</i>the<i></i>
+the|<u>I went to the store but the hours were different</u>the<u></u>
+the|<dl>I went to the store but the hours were different</dl>the<dl></dl>
+the|<ol>I went to the store but the hours were different</ol>the<ol></ol>
+the|<ul>I went to the store but the hours were different</ul>the<ul></ul>
+the|<a href="the.html">I went to the store but the hours were different</a>the in between<a></a><h1>h1I went to the store but the hours were differenth1</h1>the h1 tag<h1></h1>
+the|<html><body>I went to the 49ers game last week.<a>Here is the link</a></body></html>

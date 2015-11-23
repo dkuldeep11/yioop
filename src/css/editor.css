@@ -1,0 +1,215 @@
+/**
+ * SeekQuarry/Yioop --
+ * Open Source Pure PHP Search Engine, Crawler, and Indexer
+ *
+ * Copyright (C) 2009 - 2015  Chris Pollett chris@pollett.org
+ *
+ * LICENSE:
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * END LICENSE
+ *
+ * @author Eswara Rajesh Pinapala
+ * @license http://www.gnu.org/licenses/ GPL3
+ * @link http://www.seekquarry.com/
+ * @copyright 2009 - 2015
+ * @filesource
+ */
+/*
+    editor.css
+    Stylesheet for text-area editor associated with editing wiki pages
+ */
+.wiki-editor
+{
+    display: block;
+    margin: 0 auto;
+}
+.wiki-editor div
+{
+    padding: 5px;
+}
+.wiki-buttons
+{
+    margin-bottom:2px;
+}
+.wiki-buttons input
+{
+    border-style: solid;
+    cursor: pointer;
+    display: inline-block;
+    height: 36px;
+    vertical-align: top;
+    width: 36px;
+}
+.wiki-buttons select
+{
+    background: lightgray;
+    border: 1px solid #EEE;
+    font-size:14pt;
+    height:36px;
+    margin-top: 2px;
+}
+
+.wiki-popup-prompt
+{
+    background-color:gray;
+    display: none;
+    height:100%;
+    left: 0;
+    right:0;
+    opacity:0.95;
+    position:fixed;
+    top: 0;
+    width:100%;
+    z-index:100;
+}
+
+.wiki-popup-content
+{
+    background-color: white;
+    border: 16px solid #8A4;
+    height: 3in;
+    left: 20%;
+    right: 20%;
+    overflow: auto;
+    padding: 16px;
+    position:fixed;
+    top: 20%;
+    width: 5in;
+    z-index:101;
+
+}
+.wiki-popup-content h2
+{
+    padding:30px;
+}
+.wiki-popup-content div
+{
+    padding:15px;
+}
+.wiki-popup-content select
+{
+    font-size: 18pt;
+}
+.wiki-popup-content table
+{
+    margin: auto;
+}
+
+.wikibtn-bold
+{
+    background: url(../resources/wiki_button_images/wikibtn-bold.png) no-repeat;
+}
+.wikibtn-underline
+{
+    background: url(../resources/wiki_button_images/wikibtn-underline.png)
+        no-repeat;
+}
+.wikibtn-bullets
+{
+    background: url(../resources/wiki_button_images/wikibtn-bullets.png)
+        no-repeat;
+}
+.wikibtn-heading
+{
+    background: url(../resources/wiki_button_images/wikibtn-heading.png)
+        no-repeat;
+}
+.wikibtn-hr
+{
+    background: url(../resources/wiki_button_images/wikibtn-hr.png) no-repeat;
+}
+.wikibtn-hyperlink
+{
+    background: url(../resources/wiki_button_images/wikibtn-hyperlink.png)
+        no-repeat;
+}
+.wikibtn-italic
+{
+    background: url(../resources/wiki_button_images/wikibtn-italic.png)
+        no-repeat;
+}
+.wikibtn-nowiki
+{
+    background: url(../resources/wiki_button_images/wikibtn-nowiki.png)
+        no-repeat;
+}
+.wikibtn-numbers
+{
+    background:url(../resources/wiki_button_images/wikibtn-numbers.png)
+        no-repeat;
+}
+.wikibtn-strike
+{
+    background: url(../resources/wiki_button_images/wikibtn-strike.png)
+        no-repeat;
+}
+.wikibtn-table
+{
+    background: url(../resources/wiki_button_images/wikibtn-table.png)
+        no-repeat;
+}
+.wikibtn-search-widget
+{
+    background: url(../resources/wiki_button_images/wikibtn-search-widget.png)
+        no-repeat;
+}
+
+.wikibtn-slide
+{
+    background: url(../resources/wiki_button_images/wikibtn-slide.png)
+        no-repeat;
+}
+
+.wikibtn-definitionlist
+{
+    background: url(../resources/wiki_button_images/wikibtn-definitionlist.png)
+        no-repeat;
+}
+.wikibtn-centeraligned
+{
+    background: url(../resources/wiki_button_images/wikibtn-centeraligned.png)
+        no-repeat;
+}
+.wikibtn-rightaligned
+{
+    background: url(../resources/wiki_button_images/wikibtn-rightaligned.png)
+        no-repeat;
+}
+.wikibtn-leftaligned
+{
+    background: url(../resources/wiki_button_images/wikibtn-leftaligned.png)
+        no-repeat;
+}
+.wikibtn-bold:hover,
+.wikibtn-bullets:hover,
+.wikibtn-heading:hover,
+.wikibtn-hr:hover,
+.wikibtn-hyperlink:hover,
+.wikibtn-italic:hover,
+.wikibtn-nowiki:hover,
+.wikibtn-numbers:hover,
+.wikibtn-search-widget:hover,
+.wikibtn-strike:hover,
+.wikibtn-table:hover,
+.wikibtn-underline:hover,
+.wikibtn-slide:hover,
+.wikibtn-definitionlist:hover,
+.wikibtn-rightaligned:hover,
+.wikibtn-leftaligned:hover,
+.wikibtn-centeraligned:hover
+{
+    background-position: 0 -36px;
+}

@@ -1,0 +1,2930 @@
+/**
+ * SeekQuarry/Yioop --
+ * Open Source Pure PHP Search Engine, Crawler, and Indexer
+ *
+ * Copyright (C) 2009 - 2015  Chris Pollett chris@pollett.org
+ *
+ * LICENSE:
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * END LICENSE
+ *
+ * @author Chris Pollett chris@pollett.org
+ * @license http://www.gnu.org/licenses/ GPL3
+ * @link http://www.seekquarry.com/
+ * @copyright 2009 - 2015
+ * @filesource
+ */
+/*
+    search.css
+    Main stylesheet for Yioop search engine
+ */
+html, body, .user-nav ul, .subsearch ul
+ { margin: 0; padding: 0; border: 0; vertical-align: baseline; }
+/*
+   We begin with some generic global styles
+   and classes
+ */
+h2,
+h3
+{
+    margin-bottom: 0;
+}
+p
+{
+    margin: 0;
+    padding: 0;
+    width: 8.25in;
+}
+.mobile p
+{
+    min-width:300px;
+    width:auto;
+}
+.mobile pre
+{
+   white-space:pre-wrap;
+}
+.echo-link
+{
+    color: green;
+    word-wrap: break-word;
+}
+.hidden
+{
+    visibility: hidden;
+}
+.left
+{
+    float: left;
+}
+.right
+{
+    float: right;
+}
+.clear
+{
+    clear:both;
+}
+.none
+{
+    display:none;
+}
+.small
+{
+    font-size:9.5pt;
+}
+.no-margin
+{
+    margin: 0;
+}
+.inline div,
+.inline form,
+.inline p
+{
+    display: inline-block;
+}
+.inline ul,
+.inline li
+{
+    display: inline;
+    list-style-type: none;
+}
+.inline li
+{
+    border-right: 2px solid black;
+    padding:.05in;
+}
+.inline li:first-child
+{
+    border-left: 2px solid black;
+    padding:.03in;
+}
+.indent
+{
+    text-indent: 0.25in;
+}
+span.indent1
+{
+    margin-left: 0.25in;
+}
+span.indent2
+{
+    margin-left: 0.5in;
+}
+span.indent3
+{
+    margin-left: 0.75in;
+}
+span.indent4
+{
+    margin-left: 1in;
+}
+span.indent5
+{
+    margin-left: 1.25in;
+}
+.mobile .indent
+{
+    text-indent: 10px;
+}
+.mobile span.indent1
+{
+    margin-left: 10px;
+}
+.mobile span.indent2
+{
+    margin-left: 20px;
+}
+.mobile span.indent3
+{
+    margin-left: 30px;
+}
+.mobile span.indent4
+{
+    margin-left: 40px;
+}
+.mobile span.indent5
+{
+    margin-left: 50px;
+}
+.html-ltr .float-opposite
+{
+    float: right;
+}
+.html-rtl .float-opposite
+{
+    float: left;
+}
+.html-ltr .float-same
+{
+    float: left;
+}
+.html-rtl .float-same
+{
+    float: right;
+}
+.align-right
+{
+    text-align: right;
+}
+.align-left
+{
+    text-align: left;
+}
+.align-center
+{
+    text-align: center;
+}
+.html-ltr .align-opposite
+{
+    text-align: right
+}
+.html-rtl .align-opposite
+{
+    text-align: left;
+}
+.blockquote
+{
+    margin-left: 0.3in;
+    margin-right: 0.3in;
+}
+.mobile .blockquote
+{
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.small-font
+{
+    font-size:12pt;
+}
+.medium-font
+{
+    font-size:16pt;
+}
+.big-font
+{
+    font-size:20pt;
+}
+.mobile .small-font
+{
+    font-size:10pt;
+}
+.mobile .medium-font
+{
+    font-size:12pt;
+}
+.mobile .big-font
+{
+    font-size:14pt;
+}
+.black
+{
+    color: black;
+}
+.red
+{
+    color: red;
+}
+.green
+{
+    color: green;
+}
+.highlight,
+.back-red
+{
+    background-color: red;
+}
+.back-green
+{
+    background-color: green;
+}
+.back-gray
+{
+    background-color: lightgray;
+}
+.gray
+{
+    color: gray;
+}
+.light-gray
+{
+    color: #BBB;
+}
+.back-dark-gray
+{
+    background-color: #CCC;
+}
+.gray-link
+{
+    color: gray;
+    text-decoration: none;
+}
+.gray-link:hover
+{
+    text-decoration: underline;
+}
+a.echo-link
+{
+    text-decoration: none;
+}
+a.echo-link:hover
+{
+    text-decoration: underline;
+}
+.back-yellow
+{
+    background-color: yellow;
+}
+.clear
+{
+    clear: both;
+}
+.width-half
+{
+    width:50%;
+}
+.width-three-quarter
+{
+    width:75%;
+}
+.width-half img,
+.width-three-quarter img
+{
+    width:100%;
+}
+.frame
+{
+    border: 1px solid #ccc;
+    position: relative;
+}
+.solid-border {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.dashed-border {
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+}
+.name-table
+{
+    padding: 5px;
+}
+.very-narrow-field
+{
+    width: 1in;
+    font-size:10pt;
+    height:25px;
+}
+.mobile .very-narrow-field
+{
+    width: 80px;
+}
+.narrow-field
+{
+    width: 1.9in;
+}
+.mobile .narrow-field
+{
+    width: 100px;
+}
+.wide-field
+{
+    width: 3in;
+}
+.mobile .wide-field
+{
+    width: 150px;
+}
+.extra-wide-field
+{
+    width: 5in;
+}
+.mobile .extra-wide-field
+{
+    width: 200px;
+}
+.tall-text-area
+{
+    height: 4in;
+    width: 100%;
+}
+.small-text-area
+{
+    height: 2.5in;
+    width: 100%;
+}
+.mobile .tall-text-area
+{
+    width: 90%;
+}
+.medium-text-area
+{
+    height: 2.5in;
+    width: 100%;
+}
+.mobile .medium-text-area
+{
+    width: 90%;
+}
+.short-text-area
+{
+    width: 100%;
+    height: 1in;
+}
+.mobile .short-text-area
+{
+    width: 90%;
+}
+.short-text-area-two
+{
+    height: 1in;
+}
+.center
+{
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
+.bold
+{
+    font-weight: bold;
+}
+.sides-margin
+{
+    margin-left:0.6in;
+    margin-right:0.6in;
+}
+.reduce-top
+{
+    position: relative;
+    top: -.1in;
+}
+.top-margin
+{
+    margin-top: .2in;
+}
+.no-margin
+{
+    margin: 0;
+}
+.box
+{
+    border: 1px ridge #ccc;
+    padding: 3px;
+}
+.black-box
+{
+    border:2px ridge black;
+    padding:5px;
+}
+.light-gray-box
+{
+    border:2px ridge #BBB;
+    padding:5px;
+}
+.slight-pad
+{
+    padding: 0.1in;
+}
+.mobile .slight-pad
+{
+    padding: 3px;
+}
+.border-top
+{
+    border-top:2px solid black;
+    padding-top:5px;
+}
+.align-top
+{
+    vertical-align: top;
+}
+fieldset
+{
+    border-color:black;
+}
+/* set up prefixes for left-to-right, right-to-left and vertical text support*/
+.html-tb
+{
+    -ms-block-progression: tb;
+}
+.html-rl
+{
+    -ms-block-progression: rl;
+    -moz-transform: rotate(90deg) translate(2in);
+    -webkit-transform: rotate(90deg) translate(2in);
+}
+.html-lr
+{
+    -ms-block-progression: lr;
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+}
+.html-rtl
+{
+    direction: rtl;
+    text-align:right;
+}
+.html-ltr
+{
+    direction: ltr;
+    text-align: left;
+}
+body.html-rl-tb
+{
+    writing-mode: rl-tb;
+}
+body.html-lr-tb
+{
+    writing-mode: lr-tb;
+}
+body.html-tb-rl
+{
+    writing-mode: tb-rl;
+}
+body.html-tb-lr
+{
+    writing-mode: tb-lr;
+}
+/* set up global font preferences */
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    min-height: 16in;
+    padding: 0;
+    margin:  0;
+    width: 100%;
+}
+/* .mobile is used for phone devices -- an attempt has been made to
+   make the default non-mobile version of the page work with tablets
+*/
+body.mobile
+{
+    left: 0;
+    margin: 0;
+    min-height: 0;
+    width: 100%;
+}
+.body-container
+{
+    margin-bottom:0;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top:0;
+}
+/* bar on which web, images, video subsearches and sign-in stuff live
+   for many of the below things we need to handle them different on the landing
+   page from pages where search results appear
+ */
+.top-bar
+{
+    height: 30px;
+    width: 100%;
+}
+.landing-top-bar
+{
+    height: 30px;
+    width: 100%;
+}
+.mobile .top-bar,
+.mobile .landing-top-bar
+{
+    height: 40px;
+    left: 0px;
+    position: relative;
+    right: 0px;
+    top: -5px;
+    width: 100%;
+    min-width: 320px;
+    z-index: 1;
+}
+
+/* this is for informational messages when settings are changed or admin stuff
+   done
+ */
+#message
+{
+    left: 2in;
+    position: fixed;
+    right: 2in;
+    text-align: center;
+    top: .1in;
+    width: 8.5in;
+    z-index: 3;
+}
+.mobile #message
+{
+    left: 20px;
+    right: 20px;
+    width: 100%;
+}
+/*
+   for the sign-in, settings, admin, logout links on the top-bar
+ */
+.html-ltr .user-nav
+{
+    margin: 0 0.55in 0 0;
+    min-width: 9.5in;
+    padding:0;
+    text-align: right;
+}
+.html-rtl .user-nav
+{
+    margin:0 0 0 0.55in;
+    min-width: 9.5in;
+    padding:0;
+    text-align: left;
+}
+.html-ltr .user-nav ul li
+{
+    display: inline;
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.html-rtl .user-nav ul li
+{
+    display:inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+.mobile .user-nav
+{
+    font-size:14pt;
+    left:0px;
+    min-width: 0;
+    padding: 0px;
+    position:relative;
+    right:0px;
+    top: 5px;
+    width:100%;
+}
+.mobile .user-nav ul li
+{
+    padding: 5px;
+}
+/*
+   For the web, images, video links on the top-bar
+ */
+.html-ltr .subsearch ul.out-list
+{
+    float:left;
+}
+ul.out-list li.outer
+{
+    display: inline;
+    list-style-type: none;
+}
+.html-ltr .subsearch ul.out-list li.outer
+{
+    padding-left: 20px;
+}
+#more-menu
+{
+    display: none;
+}
+#more-on b
+{
+    background-color: white;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+    padding: 2px;
+    position:relative;
+    top:3px;
+    z-index: 4;
+}
+
+#more-on
+{
+    display: none;
+}
+#more-on
+{
+    background-color: gray;
+}
+li.outer div
+{
+    background-color: gray;
+    display: block;
+    padding:2px;
+    width:1.25in;
+    z-index:3;
+}
+.html-ltr li.outer div
+{
+    left: 1.85in;
+    position: relative;
+}
+.html-rtl li.outer div
+{
+    right: 1.85in;
+    position: relative;
+}
+.mobile .subsearch ul.out-list li.outer
+{
+    padding-left: 3px;
+}
+.mobile li.outer div
+{
+    left: 2px;
+    position: relative;
+    right: 2px;
+    width: 80px;
+}
+ul.in-list
+{
+    background-color: white;
+}
+.mobile ul.in-list
+{
+    padding-left:2px;
+    margin-left:0;
+}
+ul.in-list li
+{
+    list-style-type: none;
+    padding-bottom: 0.05in;
+    padding-top: 0.05in;
+}
+.mobile ul.in-list li
+{
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+.html-rtl .subsearch ul
+{
+    float: right;
+}
+.html-rtl .subsearch ul li
+{
+    display: inline;
+    list-style-type: none;
+    padding-left: 20px;
+}
+.mobile .subsearch
+{
+    left: 6px;
+    padding: 0px;
+    position: relative;
+    right: 6px;
+    top: 5px;
+    width: 220px;
+    z-index:1;
+}
+.mobile .subsearch ul li
+{
+    font-size: 14pt;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.landing-spacer
+{
+    height: 6in;
+}
+.tall-landing-spacer
+{
+    height: 10in;
+}
+/*
+   Landing page (www.yioop.com) specific css
+ */
+.html-ltr .landing,
+.html-rtl .landing
+{
+    clear: both;
+    margin-top: 1.5in;
+    min-width: 8in;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.small-top
+{
+    position: relative;
+    top:-.8in;
+}
+.medium-top
+{
+    margin-left:0.3in;
+    margin-right:0.3in;
+    position: relative;
+    top:-.8in;
+}
+.square-list
+{
+    list-style-type: square;
+}
+.mobile .landing
+{
+    clear: both;
+    left: 10px;
+    margin-top:25px;
+    min-width: 0;
+    position: relative;
+    right: 10px;
+    top: 25px;
+}
+.mobile .small-top
+{
+    position: relative;
+    top:0in;
+}
+/*
+   Style tweaks for blog, privacy, bot, settings, and admin pages
+ */
+.mobile .non-search
+{
+    left: -10px;
+    position: relative;
+    right: -10px;
+    top: 10px;
+}
+
+/*
+   Styles to control logo (image + adjacent text) on various pages
+ */
+.logo
+{
+    margin: 0 auto 0 auto;
+    left: 0.1in;
+    position: relative;
+    right: 0.1in;
+    top: -0.05in;
+}
+.mobile .non-search .logo
+{
+    margin: 0 auto 0 auto;
+    position: relative;
+    text-align: inherit;
+    top: 20px;
+}
+.admin-collapse
+{
+    position:relative;
+    top:10px;
+    height:0;
+}
+.admin-heading,
+{
+    margin-left: .06in;
+    margin-right: .06in;
+}
+.group-heading
+{
+    margin: .1in auto .4in auto;
+    text-align:center;
+}
+.group-heading small
+{
+    position: relative;
+    top: -30px;
+}
+.mobile .admin-heading
+{
+    position: absolute;
+    top: 5px;
+}
+.mobile .group-heading
+{
+    position: absolute;
+    top: 5px;
+}
+.mobile .group-heading small
+{
+    position: relative;
+    top: 0px;
+}
+.landing .logo
+{
+    min-width: 6in;
+    position: relative;
+    text-align: center;
+    top: 0;
+}
+.mobile .landing .logo
+{
+    min-width: 0px;
+}
+.logo img
+{
+    border: 0;
+    width:2in;
+}
+.group-heading img.logo
+{
+    width: 1.5in;
+}
+.mobile .logo img
+{
+    left: -8px;
+    position: relative;
+    top: 14px;
+    width: 50px;
+}
+.mobile .group-heading img
+{
+    left: 4px;
+    position: relative;
+    top: 17px;
+    width: 50px;
+}
+.landing .logo img
+{
+    border: 0;
+    width: 3in;
+}
+.mobile .landing .logo img
+{
+    position: relative;
+    left: 0px;
+    top: 14px;
+    width: 200px;
+}
+
+.mobile .admin-heading img
+{
+    left: 80px;
+    position: relative;
+    right: 80px;
+    top: 30px;
+    width: 50px;
+}
+.logo span
+{
+    position: relative;
+    top: -.3in;
+}
+
+.mobile .logo span
+{
+    position: relative;
+    top: 0;
+}
+.mobile .admin-heading span
+{
+    left: 70px;
+    position: relative;
+    right: 70px;
+    top: 20px;
+}
+.mobile .non-search .logo span
+{
+    left: 20px;
+    position: relative;
+    right: 20px;
+    top: -.3in;
+    width: 200px;
+}
+.mobile .non-search .logo img
+{
+    left: 20px;
+    position: relative;
+    right: 20px;
+    top: -20px;
+    width: 50px;
+}
+/*
+   Styles for footers on various pages
+ */
+.landing-footer,
+.setting-footer,
+.signin-exit
+{
+    clear: both;
+    margin: 0.25in auto 0.25in auto;
+    width: 7in;
+    text-align: center;
+}
+.mobile .landing-footer,
+.mobile .setting-footer,
+.mobile .signin-exit
+{
+    min-width:0;
+}
+.mobile .landing-footer
+{
+    left: 0;
+    margin-top: 0;
+    min-width: 0;
+    position: relative;
+    right: 0;
+    text-align: center;
+    top: -70px;
+    width: 100%;
+}
+.mobile .landing .landing-footer,
+.mobile .setting-footer,
+.mobile .signin-exit
+{
+    margin-top: 0.4in;
+    position: relative;
+    text-align: inherit;
+    min-width:0;
+    top: -20px;
+    width: 90%;
+}
+.html-ltr .signin-exit li
+{
+    text-align:left;
+    list-style-type: square;
+    margin-left:2.3in;
+}
+.html-rtl .signin-exit li
+{
+    text-align:right;
+    list-style-type: square;
+    margin-right:2.3in;
+}
+.mobile .signin-exit li
+{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+/*
+   If query information is available then web_layout will
+   render statistics about all the SQL and search engine
+   queries that were executed for a page. These styles
+   control how this diagnostic info renders
+ */
+.query-statistics
+{
+    border-top: 2px solid gray;
+    color: gray;
+    margin-top: 0.4in;
+}
+.mobile .query-statistics
+{
+    position: relative;
+    top: 200px;
+}
+.query
+{
+    border: 1px solid gray;
+    margin: 0.1in;
+    padding: 0.05in;
+}
+/*
+   Styles for the login, settings, and register pages
+ */
+.html-ltr .cancel
+{
+    text-align: right;
+}
+.html-rtl .cancel
+{
+    text-align: left;
+}
+.login,
+.settings
+{
+    font-size: 16pt;
+    width:5in;
+    margin: 0 auto 0 auto;
+}
+.register
+{
+    font-size: 14pt;
+    width: 6in;
+    margin: auto;
+}
+
+.login input,
+.register input
+{
+    font-size: 16pt;
+    margin: 5px;
+}
+
+.mobile .login,
+.mobile .register,
+.mobile .settings
+{
+    font-size: 14pt;
+    left: 5px;
+    position: relative;
+    right: 5px;
+    width: 100%;
+}
+.login button,
+.register button,
+.settings button
+{
+    font-size:16pt;
+}
+.settings select,
+.register select
+{
+    font-size:12pt;
+}
+.mobile .login button,
+.mobile .register button,
+.mobile .settings button,
+.mobile .settings select
+{
+    font-size: 14pt;
+}
+.mobile .register select
+{
+    font-size:12pt;
+}
+.user-icon-td
+{
+    width:1.4in;
+}
+.user-icon
+{
+    margin: auto;
+    width: 1.3in;
+}
+.mobile .user-icon-td
+{
+    width:90px;
+}
+.mobile .user-icon
+{
+    width:80px;
+}
+.upload-file
+{
+    background-color: #CCC;
+    border: 3pt #999 solid;
+    border-radius:13px;
+    padding: 2px;
+    height: .5in;
+    margin: .2in;
+    width: 2in;
+    word-wrap: break-word;
+}
+.mobile .upload-file
+{
+    width: 150px;
+    height: 30px;
+}
+
+.small-icon
+{
+    height: 0.5in;
+    position:relative;
+    top:10px;
+    width: 0.5in;
+}
+.mobile .small-icon
+{
+    height: 30px;
+    width: 30px;
+}
+.icon-upload
+{
+    left:16px;
+    padding-right:2px;
+    position:relative;
+    width: 1.6in;
+}
+.mobile .icon-upload
+{
+    left:-5px;
+    position:relative;
+    font-size:11pt;
+    width:86px;
+}
+/*
+   Styles for the statistics for a crawl page
+ */
+.stats  {
+    position: relative;
+    top: 0.1in;
+}
+.statistics
+{
+    left: .1in;
+    position: relative;
+    right: .1in;
+}
+.mobile .statistics
+{
+    font-size: 14pt;
+    left: 5px;
+    position: relative;
+    right: 5px;
+    width: 100%;
+}
+.mobile .stats span
+{
+    left: -10px;
+    position: relative;
+    top: -10px;
+    width: 200px;
+}
+.mobile .stats img
+{
+    left: 0px;
+    position: relative;
+    top: 0px;
+    width: 50px;
+}
+/*
+  Styles for search and search result pages
+ */
+.serp-body
+{
+    position: relative;
+    top: -0.4in;
+}
+.mobile .serp-body
+{
+    position: relative;
+    top: 0;
+}
+.html-ltr .serp
+{
+    left: 2.2in;
+    position: relative;
+    top: -0.9in;
+    width: 8in;
+}
+.html-ltr .serp-results
+{
+    left: 0.5in;
+    position: relative;
+    top: -0.8in;
+    width: 8in;
+}
+.html-ltr .thesaurus-serp-results
+{
+    left: 2.2in;
+    position: relative;
+    top: -1.7in;
+    width: 8in;
+}
+.html-rtl .thesaurus-serp-results
+{
+    right: 2.2in;
+    position: relative;
+    top: -1.7in;
+    width: 8in;
+}
+.html-rtl .serp
+{
+    position: relative;
+    right: 2.2in;
+    top: -0.9in;
+    width: 8in;
+}
+
+.html-rtl .serp-results
+{
+    position: relative;
+    right: 0.5in;
+    top: -0.8in;
+    width: 8in;
+}
+.html-ltr .serp-stats
+{
+    color: #666;
+    font-size: 14pt;
+    float:left;
+    margin: 0.2in 0 0 5.5in;
+    padding: 0;
+    position: relative;
+    top: -1.4in;
+}
+.html-rtl .serp-stats
+{
+    color: #666;
+    font-size: 14pt;
+    float: right;
+    margin: 0.2in 5.5in 0 0;
+    padding: 0;
+    position: relative;
+    top: -1.4in;
+}
+.news-results
+{
+    min-height:1.1in;
+}
+.news-results img
+{
+    clear:bottom;
+    height:85px;
+    margin-right:5px;
+    position:relative;
+    top:10px;
+    width:120px;
+}
+.mobile .news-results img
+{
+    max-height:65px;
+    top:7px;
+    width:100px;
+}
+
+.html-ltr .thesaurus
+{
+    color: #666;
+    font-size: 14pt;
+    font-weight: bold;
+    left: 0.2in;
+    position: relative;
+    top: -0.8in;
+    width: 8in;
+}
+.html-rtl .thesaurus
+{
+    color: #666;
+    font-size: 14pt;
+    font-weight: bold;
+    right: 0.2in;
+    position: relative;
+    top: -0.8in;
+    width: 8in;
+}
+.result
+{
+    clear: both;
+}
+.word-cloud-spacer
+{
+    margin-left:1em;
+    font-weight: bold;
+    color : gray;
+}
+.word-cloud-1
+{
+    font-size: 16pt;
+    color: #080;
+    text-decoration: none;
+}
+.word-cloud-2
+{
+    font-size: 15pt;
+    color: #090;
+    text-decoration: none;
+}
+.word-cloud-3
+{
+    font-size: 14pt;
+    color: #0A0;
+    text-decoration: none;
+}
+.word-cloud-4
+{
+    font-size: 13pt;
+    color: #0B0;
+    text-decoration: none;
+}
+.word-cloud-5
+{
+    font-size: 12pt;
+    color: #0C0;
+    text-decoration: none;
+}
+.word-cloud:hover
+{
+    text-decoration: underline;
+}
+
+.access-result
+{
+    box-shadow: 0px 0px 3px 3px #ccc;
+    font-size: 12pt;
+    padding: 5px;
+    margin:10px;
+}
+.group-result
+{
+    box-shadow: 0px 0px 3px 3px #ccc;
+    padding: .1in .1in .25in .1in;
+}
+.button-group-result
+{
+    padding: .1in .1in .25in .1in;
+}
+.button-group-result h2,
+.result h2,
+.group-result h2
+{
+    font-size: 14pt;
+    font-weight: normal;
+}
+div.button-group-result,
+div.group-result
+{
+    font-size: 12pt;
+    width:7in;
+}
+.mobile div.button-group-result,
+.mobile div.group-result
+{
+    margin: auto;
+    width: auto;
+}
+.serp-links-score
+{
+    clear: both;
+    color: #666;
+}
+.mobile .serp
+{
+    left: 50px;
+    position: relative;
+    right: 50px;
+    top: -70px;
+    width: 90%;
+}
+.mobile .serp h2
+{
+    position: relative;
+    top: -70px;
+}
+.mobile .more-options
+{
+    position: relative;
+    margin-left:10px;
+    margin-right:10px;
+    top: -50px;
+}
+.mobile .more-options h2,
+.mobile .more-options ul
+{
+    margin-top:10px;
+}
+.mobile .serp-results
+{
+    left: 6px;
+    position: relative;
+    right: 6px;
+    top: -65px;
+    width: 95%;
+    font-size:10pt;
+}
+.html-ltr .spell
+{
+    color: #666;
+    font-size: 14pt;
+    left: 49px;
+    position: relative;
+    top: -0.8in;
+    z-index: 1;
+}
+.html-rtl .spell
+{
+    color: #666;
+    font-size: 14pt;
+    right: 49px;
+    position: relative;
+    top: -0.8in;
+    z-index: 1;
+}
+.mobile .spell
+{
+    position: relative;
+    top:-15px;
+    left: 4px;
+    right: 4px;
+}
+/*
+   The next styles are for the built-in search box that comes with
+   Yioop rather than the search boxes which can be inserted on wiki pages.
+ */
+.search-box
+{
+    border-color: #AAA;
+    border-radius: 0.07in;
+    border-style: solid;
+    border-width: 0.02in;
+    padding: 0.04in;
+    padding-bottom: 0.06in;
+    width: 7.075in;
+}
+.html-ltr .search-box
+{
+    padding-left:.125in;
+}
+.html-rtl .search-box
+{
+    padding-right:.125in;
+}
+.landing .search-box
+{
+    margin:auto;
+    min-width: 8.1in;
+    width: 8.1in;
+}
+.mobile .search-box
+{
+    padding: 3px;
+    padding-bottom: 2px;
+    position: relative;
+    max-width: 450px;
+    min-width: 285px;
+    top: 25px;
+    width:90%;
+}
+.mobile .landing .search-box
+{
+    position: relative;
+    top: 10px;
+}
+.search-box p
+{
+    font-size: 16pt;
+}
+.search-box input
+{
+    appearance: none;
+    border: 0;
+    font-size: 16pt;
+    margin: 0;
+    padding: 0.05in;
+    -webkit-appearance:none;
+    width:6.4in;
+}
+.landing .search-box input
+{
+    width:7.4in;
+}
+
+.search-box button
+{
+    margin:0;
+    padding:0;
+    width:0.5in;
+}
+.search-box img
+{
+    left:-5px;
+    position:relative;
+    top:2px;
+}
+.mobile .search-box button
+{
+    padding:0;
+    width:50px;
+}
+.mobile .search-box input
+{
+    font-size: 14pt;
+    position: relative;
+    top: -3px;
+    max-width: 400px;
+    min-width: 234px;
+    width:80%;
+}
+.mobile .landing .search-box input
+{
+    font-size: 14pt;
+
+}
+/*
+    The next styles are for the search boxes which can be inserted
+    into wiki pages
+ */
+.mobile .small-search-box
+{
+    position:static;
+    width:1.6in;
+}
+.mobile .medium-search-box
+{
+    position:static;
+    width:2.1in;
+}
+.mobile .large-search-box
+{
+    position:static;
+    width:2.6in;
+}
+.mobile .small-search-box .search-input
+{
+    position:static;
+    width:.95in;
+}
+.mobile .medium-search-box .search-input
+{
+    position:static;
+    width:1.45in;
+}
+.mobile .large-search-box .search-input
+{
+    position:static;
+    width:1.95in;
+}
+.small-search-box
+{
+    margin:4px;
+    position:static;
+    width:2.6in;
+}
+.small-search-box .search-input
+{
+    position:static;
+    width:1.95in;
+}
+.medium-search-box
+{
+    margin:4px;
+    position:static;
+    width:4.1in;
+}
+.medium-search-box .search-input
+{
+    position:static;
+    width:3.45in;
+}
+.large-search-box
+{
+    margin:4px;
+    position:static;
+    width:5.6in;
+}
+.large-search-box .search-input
+{
+    position:static;
+    width:4.95in;
+}
+.search-input
+{
+    font-size: 0.22in!important;
+    padding: 2px!important;
+    position: relative!important;
+    margin: 0!important;
+    top: -3px!important;
+}
+.search-button
+{
+    height:0.35in;
+    left:-4px;
+    margin: 0;
+    padding: 0;
+    position:relative;
+    right:-4px;
+}
+.mobile .search-button
+{
+    left:-4px;
+    position:relative;
+    right:-4px;
+    width:50px;
+}
+/*
+   Styles for the word suggest drop down on search pages
+ */
+.dropdown
+{
+    border-bottom-style: solid;
+    border-color: #AAA;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-style: none;
+    border-width: 2px;
+    border-bottom-right-radius: 0.05in;
+    border-bottom-left-radius: 0.05in;
+    border-top-left-radius: 0.05in;
+    left: -0.66in;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 0;
+    position: relative;
+    top: 0in;
+    width: 6.6in;
+}
+.landing .dropdown
+{
+    left: -0.3in;
+    position: relative;
+    top:0;
+    width: 7.6in;
+}
+.mobile .dropdown
+{
+    display: none;
+}
+.suggest-list
+{
+    border: 0;
+    font-size: 16pt;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 0.1in;
+    visibility: hidden;
+    width: 6.5in;
+}
+.landing .suggest-list
+{
+    width: 7.4in;
+}
+.suggest-list li
+{
+    cursor: pointer;
+    font-size: 16pt;
+    list-style:none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0.1in;
+    padding-right: 0.1in;
+    padding-top: 0;
+    width: 6.5in;
+}
+.landing .suggest-list li
+{
+    width: 7.8in;
+}
+.suggest-list li span
+{
+    color: black;
+    display: block;
+    height: 18pt;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    z-index: 5;
+}
+.mobile .suggest-list
+{
+    display: none;
+}
+/*
+   Styles for the bottom of search results links to additional
+   pages of search results
+ */
+.pagination
+{
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+.html-ltr .pagination ul,
+.html-ltr .pagination ul li
+{
+    display: inline;
+    font-size: 14pt;
+    padding-left: 0;
+    padding-right: 8px;
+}
+.html-rtl .pagination ul,
+.html-rtl .pagination ul li
+{
+    display:inline;
+    font-size: 14pt;
+    padding-left: 8px;
+    padding-right: 0;
+}
+.html-ltr .pagination ul li a.item
+{
+    border-color: blue;
+    border-style: solid;
+    border-width: 2px;
+    display: block;
+    float: left;
+    height: 25px;
+    margin-right: 8px;
+    padding-bottom: 0px;
+    padding-top: 1px;
+    text-align: center;
+    text-decoration: none;
+    width: 25px;
+}
+.html-rtl .pagination ul li a.item
+{
+    border-color: blue;
+    border-style: solid;
+    border-width: 2px;
+    display: block;
+    float: right;
+    height: 25px;
+    margin-left: 8px;
+    padding-bottom: 0px;
+    padding-top: 1px;
+    text-align: center;
+    text-decoration: none;
+    width: 25px;
+}
+.micro-pagination ul li a.item:hover,
+.pagination ul li a.item:hover
+{
+    background-color: #88F;
+    color: white;
+}
+.html-ltr .pagination ul li span.item
+{
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    display: block;
+    float: left;
+    height: 25px;
+    margin-right: 8px;
+    padding-top: 1px;
+    position: relative;
+    text-align: center;
+    top: -1px;
+    width: 25px;
+}
+.html-rtl .pagination ul li span.item
+{
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    display: block;
+    float: right;
+    height: 25px;
+    margin-left: 8px;
+    position: relative;
+    text-align: center;
+    top: -1px;
+    width: 25px;
+}
+.html-ltr .pagination ul li span.end
+{
+    display:block;
+    float:left;
+    margin-right: 8px;
+    padding-top: 1px;
+}
+.html-rtl .pagination ul li span.end
+{
+    display: block;
+    float: right;
+    margin-left: 8px;
+}
+.micro-pagination
+{
+    display:inline;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+.micro-pagination ul,
+.micro-pagination ul li
+{
+    display: inline;
+    font-size: 8pt;
+    margin:0;
+    padding:0;
+    position:relative;
+    top:-1px;
+}
+.micro-pagination ul li a.item
+{
+    border-color: gray;
+    border-style: solid;
+    border-width: 2px;
+    padding: 2px;
+    margin: 2px;
+    height: 12px;
+    text-align: center;
+    text-decoration: none;
+    width: 12px;
+}
+/*
+   Styles for video subsearch page
+ */
+.html-ltr .video-link
+{
+    float: left;
+    margin: 0;
+    height: 90px;
+    padding-top: 0.05in;
+    width: 128px;
+}
+.video-link .thumb
+{
+    height: 80px;
+    width: 120px;
+}
+.html-ltr .video-play
+{
+    height: 30px;
+    left: 40px;
+    position: relative;
+    top: -60px;
+    width: 40px;
+}
+.html-rtl .video-link
+{
+    float: right;
+    height: 90px;
+    margin:0;
+    padding-top: 0.05in;
+    width: 128px;
+}
+.html-rtl .video-play
+{
+    height: 30px;
+    position: relative;
+    right: 40px;
+    top: -60px;
+    width: 40px;
+}
+/*
+   Styles for image subsearch page
+ */
+.image-list
+{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+}
+.image-list img
+{
+    width:1in;
+    height:1in;
+    padding: 5px;
+}
+.mobile .image-list
+{
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 2px;
+    position: relative;
+    top: 5px;
+}
+.mobile .image-list img
+{
+    height: 50px;
+    width: 50px;
+    padding:2px;
+}
+/*
+   Styles for tables on login, settings, and admin pages
+ */
+.mobile .table-input select
+{
+    width: 190px;
+}
+.mobile .table-input input
+{
+    width: 150px;
+}
+.html-ltr .table-label
+{
+    text-align: right;
+}
+.html-ltr .table-input
+{
+    text-align: left;
+}
+.html-rtl .table-label
+{
+    text-align: left;
+}
+.html-rtl .table-input
+{
+    text-align: right;
+}
+/*
+    Styles for different admin page elements
+ */
+.content
+{
+    background-color: white;
+    font-size: 12pt;
+    margin-left: 0.5in;
+    margin-right: 0.5in;
+    min-height: 3in;
+    padding: 8px;
+    position: relative;
+    width: 8in;
+}
+.mobile .content
+{
+    clear: both;
+    position: relative;
+    left: 0;
+    margin: 3px;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.content p,
+.content div
+{
+    padding-bottom: 8px;
+}
+.html-ltr .button-box
+{
+    color: black;
+    font-size: 16pt;
+    height:.4in;
+    left: -0.05in;
+    margin-left: 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    top: 0.015in;
+}
+
+.html-rtl .button-box
+{
+    color: black;
+    font-size: 16pt;
+    height:.4in;
+    margin-right: 0;
+    position: relative;
+    right: -0.05in;
+    text-align: center;
+    text-decoration: none;
+    top: 0.015in;
+}
+.mobile .button-box
+{
+    font-size: 12pt;
+    height:30px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1px;
+}
+.tiny-button-box
+{
+    font-size: 12pt;
+    margin:1px;
+    padding:1px;
+}
+.content-container
+{
+    position: relative;
+    top: -0.4in;
+}
+.mobile .content-container
+{
+    position: relative;
+    top: 0;
+}
+.html-ltr .component-container
+{
+    float: left;
+    width: 2.6in;
+}
+.html-rtl .component-container
+{
+    float: right;
+    width: 2.6in;
+}
+.html-ltr .activity-menu,
+.html-rtl .activity-menu
+{
+    border-radius: 8px;
+    padding: 0;
+    position: relative;
+    top: 30px;
+    width: 2.5in;
+    margin-bottom:.1in;
+    margin-left: 0.06in;
+    margin-right: 0.06in;
+}
+.mobile .activity-menu
+{
+    border: 0;
+    float: none;
+    position: relative;
+    top: 50px;
+    width:97%;
+}
+.activity-menu h2
+{
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    color: #222;
+    font-size:14pt;
+    margin: 0;
+    padding: .01in .05in .01in .05in;
+}
+.mobile .activity-menu h2
+{
+    display: none;
+}
+.mobile .activity-menu select
+{
+    font-size:16pt;
+    width:100%;
+}
+.activity-menu li
+{
+    list-style-position: inside;
+    list-style-type: none;
+    margin: 0;
+    padding: 0.05in;
+}
+.activity-menu li.bottom-border
+{
+    border-bottom: 1px solid #ccc;
+}
+.activity-menu li a
+{
+    color: #222;
+    text-decoration: none;
+}
+.activity-menu li a:hover
+{
+    color: #222;
+    text-decoration: underline;
+}
+.activity-menu ul
+{
+    border-radius: 8px;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+.presentation-activity
+{
+    clear:both;
+}
+.current-activity
+{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16pt;
+    max-width: 9in;
+    min-height: 6.5in;
+    min-width: 8in;
+    padding-left: 0.1in;
+    padding-right: 0.1in;
+    padding-bottom: 0.1in;
+    position: relative;
+    top: 30px;
+}
+
+.html-ltr .current-activity
+{
+    margin-left: 2.75in;
+}
+.html-rtl .current-activity
+{
+    margin-right: 2.75in;
+}
+.current-activity-header
+{
+    margin: auto;
+    max-width: 9in;
+    min-width: 9in;
+    position:relative;
+    top: 0.15in;
+}
+.mobile .current-activity-header
+{
+    min-width: 320px;
+    width:100%;
+}
+.mobile .wiki
+{
+    position:relative;
+    top: -35px;
+}
+.current-activity-footer
+{
+    min-width: 9in;
+    max-width: 9in;
+    position: relative;
+    top:0.3in;
+}
+.mobile .current-activity-footer
+{
+    min-width: 320px;
+    width:100%;
+}
+.small-margin-current-activity
+{
+    font-size: 16pt;
+    margin: auto;
+    max-width: 9in;
+    min-height: 6.5in;
+    min-width: 9in;
+    padding-left: 0.1in;
+    padding-right: 0.1in;
+    padding-bottom: 0.1in;
+    position: relative;
+    top: -0.35in;
+}
+.mobile #feedstatus
+{
+    position: relative;
+    top: 55px;
+}
+.static
+{
+    position:relative;
+    top: 0px;
+}
+.mobile .current-activity,
+.mobile .small-margin-current-activity
+{
+    clear:both;
+    font-size:12pt;
+    left: 5px;
+    margin:0;
+    margin-right: 3px;
+    min-height: 200px;
+    min-width: 0;
+    padding: 0 1px 1px 1px;
+    position: relative;
+    right: 5px;
+    top: 55px;
+    width: 96%;
+}
+
+.mobile textarea
+{
+    font-size:14pt;
+}
+
+.current-activity h2,
+.small-margin-current-activity h2
+{
+    margin-top: 0.05in;
+    padding-top: 0.05in;
+}
+.current-activity input,
+.small-margin-current-activity input
+{
+    font-size: 16pt;
+    position: relative;
+    top: 2px;
+}
+.current-activity object,
+.small-margin-current-activity object
+{
+    height: 2in;
+    min-width: 6in;
+    width: 8in;
+}
+.current-activity select,
+.small-margin-current-activity select
+{
+    font-size: 16pt;
+}
+.mobile .current-activity select,
+.small-margin-current-activity select
+{
+    font-size: 12pt;
+}
+.current-activity pre,
+.small-margin-current-activity pre
+{
+    font-size: 10pt;
+}
+.mobile .current-activity img,
+.mobile .small-margin-current-activity img
+{
+    max-width:95%;
+}
+.table-margin
+{
+    font-size:14pt;
+}
+.tiny-field
+{
+    font-size:12pt;
+    height: 13pt;
+    width: .6in;
+}
+.html-ltr .table-margin
+{
+    position:relative;
+    margin-right: 0.5in;
+    padding:1px;
+    top: 0.1in;
+}
+.html-rtl .table-margin
+{
+    position:relative;
+    margin-left: 0.5in;
+    padding:1px;
+    top: 0.1in;
+}
+.role-table,
+.locale-table
+{
+    font-size:13pt;
+}
+.html-ltr .role-table,
+.html-ltr .role-table td,
+.html-ltr .role-table th
+{
+    border: 1px solid black;
+    margin-left: 0.1in;
+    padding: 1px;
+}
+.html-rtl .role-table,
+.html-rtl .role-table td,
+.html-rtl .role-table th
+{
+    border: 1px solid black;
+    margin-right: 0.1in;
+    padding: 1px;
+}
+.role-table select,
+.role-table option
+{
+    font-size:10pt;
+    padding:0;
+    margin:0;
+}
+.html-ltr .locale-table,
+.html-ltr .locale-table td,
+.html-ltr .locale-table th
+{
+    border: 1px ridge black;
+    margin-left: 0.2in;
+}
+.html-rtl .locale-table,
+.html-rtl .locale-table td,
+.html-rtl .locale-table th
+{
+    border: 1px ridge black;
+    margin-right: 0.2in;
+}
+.tab-menu-list
+{
+    border-bottom: 2px solid black;
+    margin-bottom: 0px;
+    padding: 0px;
+    z-index: 1;
+}
+.tab-menu-list li
+{
+    display: inline;
+    list-style-type: none;
+}
+.tab-menu-list a
+{
+    background-color:#EEE;
+    border: 1px solid black;
+    border-bottom: 0px;
+    margin: 0;
+    overflow: hidden;
+    padding: 5px 5px 0px 5px;
+    text-decoration: none;
+}
+.tab-menu-list a.active
+{
+    background-color: white;
+    border-bottom: 3px solid white;
+}
+.tab-menu-content
+{
+    border: 1px solid black;
+    border-top: none;
+    padding: 10px;
+    z-index: 2;
+}
+.crawls-table,
+.crawls-table td,
+.crawls-table th,
+.file-types-table,
+.file-types-table td,
+.mixes-table,
+.mixes-table td,
+.mixes-table th,
+.classifiers-table,
+.classifiers-table td,
+.classifiers-table th,
+.search-page-table,
+.search-page-table td,
+.search-sources-table,
+.search-sources-table td,
+.search-sources-table th
+{
+    border: 1px ridge black;
+    padding: 2px;
+}
+.mixes-table td
+{
+    font-size:12pt;
+}
+.html-ltr .file-types-table,
+.html-ltr .file-types-all td,
+.html-ltr .classifiers-table,
+.html-ltr .classifiers-all td,
+.html-ltr .search-page-table,
+.html-ltr .search-page-all td
+{
+   margin-left: 0.3in;
+   vertical-align: top;
+}
+.html-rtl .file-types-table,
+.html-rtl .file-types-all td,
+.html-rtl .search-page-table,
+.html-rtl .search-page-all td
+{
+   margin-right: 0.3in;
+   vertical-align: top;
+}
+.mobile .file-types-table,
+.mobile .file-types-all td,
+.mobile .search-page-table,
+.mobile .search-page-all td
+{
+   margin-left: 2px;
+   margin-right: 2px;
+   vertical-align: top;
+}
+.html-ltr .weights-table th
+{
+    text-align: right;
+}
+.html-rtl .weights-table th
+{
+    text-align: left;
+}
+.machine-table,
+.machine-table td,
+.machine-table th
+{
+    border: 1px ridge black;
+    margin: 1px;
+    padding: 3px;
+}
+.machine-table-hr,
+.machine-table-hr td
+{
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.toggle-table,
+.toggle-table td
+{
+    border: 1px ridge black;
+}
+.file-types-table td,
+.translate-table,
+.translate-table td,
+.translate-table th
+{
+    border: 1px ridge black;
+}
+.classifiers-table td.check
+{
+    padding: 0;
+    text-align: center;
+}
+.indexing-plugin-table
+{
+    margin-left: 0.3in;
+    margin-right: 0.3in;
+    padding: 3px;
+}
+.indexing-plugin-table,
+.indexing-plugin-table td,
+.indexing-plugin-table th
+{
+    border: 1px ridge black;
+    text-align: center;
+}
+.indexing-plugin-table th
+{
+    padding: 0.04in;
+}
+.html-ltr .indexing-plugin-table td.check
+{
+    padding: 0.1in;
+    text-align: left;
+}
+.html-rtl .indexing-plugin-table td.check
+{
+    padding: 0.1in;
+    text-align: left;
+}
+.indexing-plugin-lightbox, .share-lightbox
+{
+    background-color:gray;
+    display: none;
+    height:16.5in;
+    left: 0%;
+    right:0%;
+    opacity:0.95;
+    position:absolute;
+    top: 0%;
+    width:100%;
+    z-index:100;
+}
+.mobile .indexing-plugin-lightbox
+{
+    left: 0px;
+    right: 0px;
+}
+.mobile .light-content h2
+{
+    font-size:12pt;
+    padding:20px;
+}
+.light-content
+{
+    height: 4in;
+    left: 20%;
+    right: 20%;
+    overflow: auto;
+    padding: 16px;
+    position: absolute;
+    width: 60%;
+    z-index:101;
+}
+.indexing-plugin-lightbox .light-content
+{
+    top: 8.5in;
+}
+.share-lightbox .light-content
+{
+    top: 1.5in;
+    font-size:16pt;
+}
+.share-lightbox .light-content input
+{
+    font-size:16pt;
+}
+.mobile .light-content
+{
+    border: 5px solid #8A4;
+    left:10px;
+    padding: 15px;
+    right:10px;
+    width:260px;
+}
+.restrict-sites-by-url
+{
+    height:0.25in;
+    width: 0.25in;
+}
+.overlay
+{
+    margin:100px auto;
+}
+/** Feed styles*/
+.feed-user-link
+{
+    position:relative;
+    top:-6px;
+}
+.feed-user-icon
+{
+    width: 70px;
+}
+.html-ltr .feed-item-body
+{
+    margin-left:.8in;
+    min-height:.7in;
+}
+.html-rtl .feed-item-body
+{
+    margin-right:.8in;
+    min-height:.7in;
+}
+.feed-item-body img,
+.feed-item-body video
+{
+    max-width:100%;
+}
+.wiki-resource-image
+{
+    max-width:100%;
+}
+.wiki-history-discuss
+{
+    position:relative;
+    top:35px;
+}
+
+.mobile .wiki-history-discuss
+{
+    position:relative;
+    top:20px;
+}
+.upload-gray-box
+{
+    background-color: gray;
+    border:1px solid black;
+    border-radius: 5px;
+    font-size:10pt;
+    padding: 2px;
+    width:100%;
+}
+.mobile .upload-gray-box
+{
+    width:88%;
+}
+.media-upload-box
+{
+    background-color: #CCC;
+    border:1px solid black;
+    border-radius: 5px;
+    font-size:10pt;
+    margin-bottom: 4px;
+    min-height:1in;
+    padding: 2px;
+    width:100%;
+}
+.mobile .media-upload-box
+{
+    width: 88%;
+}
+/* Captcha settings styles */
+.captcha {
+    padding: 5px;
+    width: 2.1in;
+}
+/**
+ * Styles for wiki pages
+ */
+table.wikitable
+{
+    background:white;
+    border:1px #AAA solid;
+    border-collapse: collapse;
+    margin:1em 0;
+}
+table.wikitable > tr > th,
+table.wikitable > tr > td,
+table.wikitable > * > tr > th,
+table.wikitable > * > tr > td
+{
+    border:1px #AAA solid;
+    padding:0.2em;
+}
+table.wikitable > tr > th,
+table.wikitable > * > tr > th
+{
+    text-align:center;
+    background:white;
+    font-weight:bold
+}
+table.wikitable > caption
+{
+    font-weight:bold;
+}
+.resource-list td
+{
+    padding:3px;
+    vertical-align:middle;
+}
+.resource-list img
+{
+    height: 0.4in;
+    width:0.3in;
+}
+.mobile .resource-list input
+{
+    width:150px;
+}
+/*
+  Styles for the classifiers settings pages
+ */
+#update-accuracy.disabled
+{
+    color: gray;
+}
+#label-docs-form th,
+#label-docs-queue .actions
+{
+    font-weight: normal;
+    padding: 0.1in 0.2in 0.1in 0in;
+    width: 1.0in;
+}
+#label-docs-queue .actions
+{
+    padding: 0.1in;
+}
+#label-docs-queue
+{
+    font-size: 11pt;
+}
+#label-docs-queue td
+{
+    vertical-align: top;
+    padding-top: 10px;
+}
+#label-docs-queue .labelled td
+{
+    background-color: #f0f0f0;
+}
+#label-docs-queue .notinclass td
+{
+    background-color: #FFE0E0;
+}
+#label-docs-queue .inclass td
+{
+    background-color: #F0FFF0;
+}
+#label-docs-queue tr.inclass a.inclass,
+#label-docs-queue tr.notinclass a.notinclass,
+#label-docs-queue tr.skip a.skip
+{
+    color: black;
+    cursor: default;
+    font-weight: bold;
+    text-decoration: none;
+}
+#label-docs-queue p
+{
+    width: auto;
+    margin: 3px 0px;
+}
+#label-docs-queue .info
+{
+    padding-left: 7px;
+}
+#label-docs-queue .description
+{
+    color: #666;
+}
+#label-docs-queue .description b
+{
+    color: black;
+}
+#transfer
+{
+    background-color: black;
+    color: white;
+    height: 100%;
+    left: 0px;
+    opacity: 0.7;
+    position: fixed;
+    text-align:center;
+    top: 0px;
+    vertical-align: middle;
+    visibility: hidden;
+    width: 100%;
+    z-index: 200;
+}
+.html-ltr #help
+{
+    border-radius: 8px;
+    float: left;
+    left: 11.1in;
+    position: absolute;
+    top: 30px;
+    width: 4.0in;
+}
+.html-rtl #help
+{
+    border-radius: 8px;
+    float: left;
+    position: absolute;
+    right: 11.1in;
+    top: 30px;
+    width: 4.0in;
+}
+.html-ltr #small-margin-help
+{
+    border-radius: 8px;
+    float: left;
+    left: 11.1in;
+    position: absolute;
+    top: 30px;
+    width: 4.0in;
+}
+.html-rtl #small-margin-help
+{
+    border-radius: 8px;
+    float: left;
+    position: absolute;
+    right: 9.5in;
+    top: 30px;
+    width: 4.0in;
+}
+#mobile-help
+{
+    margin: 2.5%;
+    position: absolute;
+    top: 142px;
+    width: 95%;
+}
+.help-pane
+{
+    display : none;
+    width: 100%;
+    border:2px solid #0094ff;
+}
+.small-margin-help-pane
+{
+    display: none;
+    width: 380px;
+    border: 2px solid #0094ff;
+    left: -1in;
+    top: 1in;
+}
+.help-title
+{
+    background:#0094ff;
+    color:white;
+    font-size: 16pt;
+    margin: 0;
+    padding: .05in;
+}
+.help-pane p
+{
+    color:#333;
+    padding:10px;
+}
+.help-button
+{
+    bottom: 50px;
+    cursor: pointer;
+    border: 1px solid #2d2bdb;
+    font-size: 20px;
+    line-height: 0.5px;
+    padding: 10px 3px;
+}
+button.default
+{
+    background: #d3d3d3;
+    color: black;
+}
+.close
+{
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 0.5px;
+    padding: 5px 0px 4px 4px;
+}
+#help-close {
+    color: #F5F5F5;
+}
+.sidebar
+{
+    top : 180px;
+}
+.new-thread-icon
+{
+    margin-bottom : -5px;
+}
+
+.top-adscript
+{
+    clear: both;
+    left: 0.5in;
+    padding: 0.05in;
+    position: relative;
+    right: 0.5in;
+    top: -1.1in;
+    max-width:8in;
+}
+.top-ad-static,
+.group-ad-static
+{
+    position: relative;
+    top:15px;
+}
+.mobile .top-adscript
+{
+    left: 3px    padding: 1px;
+    position: relative;
+    right: 3px;
+    top: -40px;
+    width:90%;
+}
+.mobile .top-ad-static
+{
+    position: relative;
+    top: 0px;
+}
+.mobile .group-ad-static
+{
+    position: relative;
+    top: 100px;
+}
+.mobile .top-adscript iframe
+{
+    -ms-zoom: 0.63;
+    -o-transform: scale(0.63);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.63);
+    -webkit-transform-origin: 0 0;
+    transform: scale(0.63);
+    transform-origin: 0 0;
+}
+
+.html-ltr .side-adscript
+{
+    float: right;
+    height:0;
+    position:relative;
+    top: 28px;
+}
+
+.html-rtl .side-adscript
+{
+    float: left;
+    height: 0;
+    position:relative;
+    top: 0px;
+}
+.display-ad
+{
+    position:relative;
+    top: 0.15in;
+}
+.display-ad p
+{
+    width : 770px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    clear: both;
+}
+.ad-preview img,
+.display-ad img
+{
+    height:41px;
+    width:50px;
+    float:left;
+}
+.display-ad img
+{
+    margin-left: 20px;
+}
+.ad-preview span,
+.display-ad span
+{
+    display: block;
+}
+.mobile .display-ad
+{
+    position:relative;
+    top: 15px;
+}
+.mobile .display-ad p
+{
+
+    width : auto;
+    max-width: 92%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin: inherit;
+    clear: both;
+    top: -20px;
+    position: relative;
+}
+.html-ltr .ad-preview
+{
+    left: 5.1in;
+    min-width: 2in;
+    position: absolute;
+    top: 0.55in;
+}
+.html-rtl .ad-preview
+{
+    right: 5.1in;
+    min-width: 2.1in;
+    position: absolute;
+    top: 0.55in;
+}
+
+p.start-ad
+{
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 0.5in;
+    width: 3in;
+}
